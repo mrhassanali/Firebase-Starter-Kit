@@ -20,7 +20,6 @@ export class AuthController {
     try {
       return await this.authService.signInWithGoogle();
     } catch (error) {
-      console.error("Controller: Google Sign-In Error:", error);
       throw error;
     }
   }
@@ -32,7 +31,6 @@ export class AuthController {
     try {
       return await this.authService.signInEmailAndPassword(email, password);
     } catch (error) {
-      console.error("Controller: Email/Password Sign-In Error:", error);
       throw error;
     }
   }
@@ -41,7 +39,6 @@ export class AuthController {
     try {
       return await this.authService.signInWithApple();
     } catch (error) {
-      console.error("Controller: Apple Sign-In Error:", error);
       throw error;
     }
   }
@@ -53,15 +50,6 @@ export class AuthController {
   public async signOut(): Promise<void> {
     try {
       await this.authService.signOut();
-    } catch (error) {
-      console.error("Controller: Sign-Out Error:", error);
-      throw error;
-    }
-  }
-
-  public async makeUserAdmin(userId: string): Promise<void> {
-    try {
-      return await this.authService.makeUserAdmin(userId);
     } catch (error) {
       throw error;
     }
