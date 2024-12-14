@@ -11,6 +11,8 @@ interface AuthContextValue {
   user: User | null;
   isNewUser: boolean;
   setIsNewUser: React.Dispatch<React.SetStateAction<boolean>>;
+  notificationPermission: boolean;
+  setNotificationPermission: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultAuthContextValue: AuthContextValue = {
@@ -19,6 +21,8 @@ const defaultAuthContextValue: AuthContextValue = {
   user: null,
   isNewUser: false,
   setIsNewUser: () => {},
+  notificationPermission: false,
+  setNotificationPermission: () => {},
 };
 const AuthContext = createContext<AuthContextValue>(defaultAuthContextValue);
 
@@ -31,6 +35,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isUser, setIsUser] = useState<boolean>(false);
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
+  const [notificationPermission, setNotificationPermission] = useState<boolean>(
+    false
+  );
   const router = useRouter();
 
   // track user credentials
@@ -58,6 +65,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         isUser,
         isNewUser,
         setIsNewUser,
+        notificationPermission,
+        setNotificationPermission,
       }}
     >
       {children}
