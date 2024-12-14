@@ -6,9 +6,7 @@ import {
   OAuthProvider,
   UserCredential,
 } from "firebase/auth";
-import { auth, firebaseFunctions } from "@/app/lib/firebase/clientApp";
-import { httpsCallable } from "firebase/functions";
-import { FIREBASE_CALLABLE_FUNCTIONS } from "@/app/lib/firebase/firebase-path";
+import { auth } from "@/app/lib/firebase/clientApp";
 
 export class AuthService {
   private auth: Auth;
@@ -25,10 +23,10 @@ export class AuthService {
 
     // Optional: Add additional Google scopes if needed
     this.googleProvider.addScope(
-      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.email"
     );
     this.googleProvider.addScope(
-      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.profile"
     );
   }
 
@@ -84,13 +82,13 @@ export class AuthService {
 
   public async signInEmailAndPassword(
     email: string,
-    password: string,
+    password: string
   ): Promise<UserCredential> {
     try {
       const result = await signInWithEmailAndPassword(
         this.auth,
         email,
-        password,
+        password
       );
       return result;
     } catch (error) {
@@ -114,18 +112,6 @@ export class AuthService {
   public async signOut(): Promise<void> {
     try {
       await this.auth.signOut();
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  public async makeUserAdmin(userId: string): Promise<void> {
-    try {
-      const makeUserAdminFuc = httpsCallable(
-        firebaseFunctions,
-        FIREBASE_CALLABLE_FUNCTIONS.MAKE_USER_ADMIN,
-      );
-      await makeUserAdminFuc({ userId });
     } catch (error) {
       throw error;
     }
