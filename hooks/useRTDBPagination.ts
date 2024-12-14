@@ -189,3 +189,20 @@ function useRTDBPagination(
 }
 
 export default useRTDBPagination;
+
+/**
+ * This hook is used to paginate data from Firebase Realtime Database.
+ * Usage:
+ * import useRTDBPagination from '@/hooks/useRTDBPagination';
+ *   
+ * const {
+    data,
+    setData,
+    hasMore,
+    loading,
+    error,
+    handleMore,
+    resetState,
+    pageNo,
+  } = useRTDBPagination(realtimeDBPath, 25);
+ */
